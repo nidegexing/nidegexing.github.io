@@ -197,10 +197,20 @@
 </ul>
 <h4 id="3-Clover引导"><a href="#3-Clover引导" class="headerlink" title="3 Clover引导"></a>3 Clover引导</h4><p>插入制作好的启动U盘，开机按F7，选择U盘UEFI启动。如果顺利，能够看到Clover的引导界面，按O进入Options。<br>选择Graphics Injector，两个选项，默认勾选下面那个。修改为：勾选上面，取消下面。<br>参照上面黑果小兵的小米Pro安装过程，第一阶段没有问题。<br>问题出在第二阶段，会跳please go to 。。。。如果你修改过Graphics Injector就不会报这个错了，会顺利安装完成，看到苹果系统桌面。</p>
 <h4 id="4-配置硬盘引导"><a href="#4-配置硬盘引导" class="headerlink" title="4 配置硬盘引导"></a>4 配置硬盘引导</h4><p>在Windows环境下，下个分区精灵 <a href="http://www.diskgenius.cn/。" target="_blank" rel="noopener">http://www.diskgenius.cn/。</a><br>把U盘内的UEFI文件夹下的内容，拷贝到系统盘的UEFI目录下。<br>添加系统引导：<a href="https://blog.daliansky.net/Add-CLOVER-boot-to-UEFI-without-any-tools.html" target="_blank" rel="noopener">看这里</a>，照着做就好。<br>到这里，重启，系统的安装部分完结，该打驱动了。</p>
+<h4 id="5-打驱动，就是选择ktext，使用clover-configurator做初始化配置。"><a href="#5-打驱动，就是选择ktext，使用clover-configurator做初始化配置。" class="headerlink" title="5 打驱动，就是选择ktext，使用clover configurator做初始化配置。"></a>5 打驱动，就是选择ktext，使用clover configurator做初始化配置。</h4><p>有几个坑：</p>
+<ol>
+<li>最好选择系统一致，UEFI一致，直接丢。</li>
+<li>自己配置的话，记得多备份。clover configurator的使用，对老鸟来说不用介绍，新人就不懂了。比如说挂载UEFI，加载plist。</li>
+<li><p>重新构建缓存命令<a href="https://blog.daliansky.net/Common-problems-and-solutions-in-macOS-Mojave-10.14-installation.html" target="_blank" rel="noopener">摘自黑果小兵</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">sudo chmod -Rf 755 /S*/L*/E*</span><br><span class="line">sudo chown -Rf 0:0 /S*/L*/E*</span><br><span class="line">sudo chmod -Rf 755 /L*/E*</span><br><span class="line">sudo chown -Rf 0:0 /L*/E*</span><br><span class="line">sudo rm -Rf /S*/L*/PrelinkedKernels/*</span><br><span class="line">sudo rm -Rf /S*/L*/Caches/com.apple.kext.caches/*</span><br><span class="line">sudo touch -f /S*/L*/E*</span><br><span class="line">sudo touch -f /L*/E*</span><br><span class="line">sudo kextcache -Boot -U /</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用网上的<a href="https://github.com/kkzzhizhou/S200H_I7-8750H_Hackintosh/issues/3" target="_blank" rel="noopener">UEFI</a>,会卡死在config。<br>修正方法是colover 设置GUI 文本模式，这样还能开机自动引导，美哉。</p>
+</li>
+</ol>
 <ul>
 <li>6Enjoy it.</li>
 </ul>
-<h3 id="叨逼叨"><a href="#叨逼叨" class="headerlink" title="叨逼叨"></a>叨逼叨</h3><p>这台i3偶尔偶尔有点小卡顿，主频够了，主要是核心数。同时想上4K显示器了，目前的配置是很难了。新款的ITX机箱太吸引人了，扩展坞的身材，装下i7-8700，而且黑苹果，我心动了。<br>期望有一台强悍的iMac，日常办公或者在家使用。还想有个Macbook pro，可以拿起来就跑，随时随地coding，性能一般就行。<br>去淘宝看了看，iMac要一万四，mac要9000，这不是给我放血么。<br>偶然间咸鱼了下，发现16年配的i3主机好像还能买个1200，新机预算3500的话，相当于2000+就能攒个iMac，搞一哈。</p>
+<h3 id="叨逼叨"><a href="#叨逼叨" class="headerlink" title="叨逼叨"></a>叨逼叨</h3><p>这台i3偶尔偶尔有点小卡顿，主频够了，主要是核心数。同时想上4K显示器了，目前的配置是很难了。新款的ITX机箱太吸引人了，扩展坞的身材，装下i7-8700，而且黑苹果，我心动了。<br>期望有一台强悍的iMac，日常办公或者在家使用。还想有个Macbook pro，可以拿起来就跑，随时随地coding，性能一般就行。<br>去淘宝看了看，iMac要一万四，mac要9000，这不是给我放血么。<br>偶然间咸鱼了下，发现16年配的i3主机好像还能卖个1200，新机预算3500的话，相当于2000+就能攒个iMac，搞一哈。</p>
 
       
 
@@ -328,6 +338,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2019/11/23/每一次相见，都是久别重逢/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          每一次相见，都是久别重逢
+        
+      </div>
+    </a>
   
   
     <a href="/2019/08/18/阿里云Web环境搭建/" id="article-nav-older" class="article-nav-link-wrap">
@@ -457,11 +476,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">HEXO</a>
+                <a href="javascript:void(0)" class="js-tag color1">VUE传值</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">博客</a>
+                <a href="javascript:void(0)" class="js-tag color1">VUE通信</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">VUE共享数据</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -473,15 +496,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">VUE传值</a>
+                <a href="javascript:void(0)" class="js-tag color5">HEXO</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">VUE通信</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">VUE共享数据</a>
+                <a href="javascript:void(0)" class="js-tag color3">博客</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -497,15 +516,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">SpringBoot</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">后端笔记</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">JAVA笔记</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">SpringBoot</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">VUE</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -521,19 +544,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">VUE</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">响应式布局</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">重装</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Win10</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -545,6 +556,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">重装</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Win10</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">总结</a>
               </li>
              
@@ -553,7 +572,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">JSX</a>
+                <a href="javascript:void(0)" class="js-tag color3">Java多线程</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -561,7 +580,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Java多线程</a>
+                <a href="javascript:void(0)" class="js-tag color4">JSX</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -593,6 +612,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">官方教程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">河西走廊</a>
               </li>
              
@@ -609,11 +632,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">官方教程</a>
+                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
+                <a href="javascript:void(0)" class="js-tag color2">GitHub</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -629,7 +652,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">GitHub</a>
+                <a href="javascript:void(0)" class="js-tag color1">SEO优化</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -641,15 +664,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">SEO优化</a>
+                <a href="javascript:void(0)" class="js-tag color3">loading</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">计算缩写</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">loading</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -665,11 +684,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">电影</a>
+                <a href="javascript:void(0)" class="js-tag color5">后端渲染</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">后端渲染</a>
+                <a href="javascript:void(0)" class="js-tag color3">电影</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -701,11 +720,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">衣服</a>
+                <a href="javascript:void(0)" class="js-tag color3">生活</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">生活</a>
+                <a href="javascript:void(0)" class="js-tag color3">衣服</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -725,11 +744,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">MarkDown</a>
+                <a href="javascript:void(0)" class="js-tag color3">离骚</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">SASS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">MarkDown</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -797,11 +820,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
             </li>
           
             <li class="search-li">
-              <a href="https://www.dafenqi.online" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>关于我</a>
+              <a href="https://github.com/nidegexing" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>关于我</a>
             </li>
           
             <li class="search-li">
-              <a href="http://39.105.151.222" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>真的我</a>
+              <a href="https://www.dafenqi.online" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>真的我</a>
             </li>
           
         </ul>
